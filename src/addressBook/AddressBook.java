@@ -7,8 +7,7 @@ public class AddressBook {
 
     private ArrayList<Entry> listOfEntries = new ArrayList<>();
 
-    public AddressBook() {
-    }
+    public AddressBook(){}
 
     public void addEntry(Scanner input){
         Entry newEntry = new Entry();
@@ -28,13 +27,23 @@ public class AddressBook {
     public void searchForEntry(Scanner input) {
 
     }
+
     public void removeEntry(Scanner input){
 
     }
     public void printAddressBook(){
 
+        for(Entry entry: this.listOfEntries) {
+            System.out.println("************");
+            System.out.println("First Name: " + entry.getFirstName());
+            System.out.println("Last Name: " + entry.getLastName());
+            System.out.println("Phone Number: " + entry.getPhoneNumber());
+            System.out.println("Email: " + entry.getEmailAddress());
+            System.out.println("************");
+        }
     }
-    public void deleteEntries(Scanner input){
 
+    public void deleteEntries(Scanner input){
+        this.listOfEntries = new ArrayList<>();
     }
 }

@@ -5,6 +5,7 @@ import addressBook.*;
 public class Main {
     public static void main(String[] args) {
         boolean notFinished = true;
+        AddressBook myAddressBook = new AddressBook();
         while(notFinished) {
             System.out.println("1) Add an entry");
             System.out.println("2) Remove an entry");
@@ -15,7 +16,6 @@ public class Main {
             System.out.println("Please choose what you want to do with the database");
 
             Scanner userInput = new Scanner(System.in);
-            AddressBook myAddressBook = new AddressBook();
             Integer desiredOperation = makeAChoice(userInput);
             System.out.println(desiredOperation);
             executeDesiredOperation(desiredOperation, myAddressBook, userInput);
