@@ -10,25 +10,31 @@ public class AddressBook {
     public AddressBook() {
     }
 
-    public void addEntry(){
-        Scanner scanner = new Scanner(System.in);
+    public void addEntry(Scanner input){
         Entry newEntry = new Entry();
         System.out.println("Please enter your first name: ");
-        newEntry.setFirstName(scanner.next());
+        String firstName = input.nextLine();
+        newEntry.setFirstName(firstName);
         System.out.println("Please enter your last name: ");
-        newEntry.setLastName(scanner.next());
+        newEntry.setLastName(input.nextLine());
         System.out.println("Please enter your phone number: ");
+        newEntry.setPhoneNumber(input.nextLine());
+        System.out.println("Please enter your email address: ");
+        newEntry.setEmailAddress(input.nextLine());
+        listOfEntries.add(newEntry);
+        System.out.println("Added New Entry!");
     }
-    public void searchForEntry() {
+
+    public void searchForEntry(Scanner input) {
 
     }
-    public void removeEntry(){
+    public void removeEntry(Scanner input){
 
     }
     public void printAddressBook(){
 
     }
-    public void deleteEntries(){
+    public void deleteEntries(Scanner input){
 
     }
 }
