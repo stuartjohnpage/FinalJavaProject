@@ -17,7 +17,10 @@ public class Main {
 
             Scanner userInput = new Scanner(System.in);
             Integer desiredOperation = makeAChoice(userInput);
-            System.out.println(desiredOperation);
+            if(desiredOperation == 6) {
+                    userInput.close();
+                    System.exit(0);
+            }
             executeDesiredOperation(desiredOperation, myAddressBook, userInput);
         }
     }
@@ -59,9 +62,6 @@ public class Main {
             case 5:
                 addressBook.deleteEntries(input);
                 break;
-            case 6:
-                input.close();
-                System.exit(0);
         }
     }
 }
