@@ -2,6 +2,8 @@ package addressBook;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 //AddressBook class to hold entry classes.
 public class AddressBook {
@@ -18,10 +20,8 @@ public class AddressBook {
         newEntry.setFirstName(firstName);
         System.out.println("Please enter your last name: ");
         newEntry.setLastName(input.nextLine());
-        System.out.println("Please enter your phone number: ");
-        newEntry.setPhoneNumber(input.nextLine());
-        System.out.println("Please enter your email address: ");
-        newEntry.setEmailAddress(input.nextLine());
+        addPhoneNumber(newEntry, input);
+        addEmailAddress(newEntry, input);
         listOfEntries.add(newEntry);
         System.out.println("Added New Entry!");
     }
@@ -85,7 +85,7 @@ public class AddressBook {
     }
 
     //Helper method to print an entry
-    public void printEntry(Entry entry) {
+    private void printEntry(Entry entry) {
         System.out.println("************");
         System.out.println("First Name: " + entry.getFirstName());
         System.out.println("Last Name: " + entry.getLastName());
@@ -95,7 +95,7 @@ public class AddressBook {
     }
 
     //Helper method to search a string with a substring
-    public void sliceSearch(Scanner input){
+    private void sliceSearch(Scanner input){
         String searchTerm = input.nextLine();
         boolean entryFound = false;
         for(Entry entry: this.listOfEntries) {
@@ -109,5 +109,31 @@ public class AddressBook {
         if(!entryFound) {
             System.out.println("Entry/Entries not found");
         }
+    }
+    //helper Regex check for valid phone number
+    private void addPhoneNumber(Entry entry, Scanner input) {
+        boolean validPhoneNumber = false;
+        String newPhoneNumber = null;
+        while(!validPhoneNumber) {
+            System.out.println("Please enter your phone number: ");
+            newPhoneNumber = input.nextLine();
+            Pattern pattern = Pattern.compile("^\\d{10}$");
+            Matcher matcher = pattern.matcher(newPhoneNumber);
+            validPhoneNumber = matcher.find();
+        }
+        entry.setPhoneNumber(newPhoneNumber);
+    }
+    //helper Regex check for valid email address
+    private void addEmailAddress(Entry entry, Scanner input) {
+        boolean validEmail = false;
+        String newEmail = null;
+        while(!validEmail) {
+            System.out.println("Please enter your email address: ");
+            newEmail = input.nextLine();
+            Pattern pattern = Pattern.compile("^.+@{1}.+\\.{1}.+$");
+            Matcher matcher = pattern.matcher(newEmail);
+            validEmail = matcher.find();
+        }
+        entry.setEmailAddress(newEmail);
     }
 }
