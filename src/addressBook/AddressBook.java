@@ -84,6 +84,11 @@ public class AddressBook {
         System.out.println("Address book cleared!");
     }
 
+    public ArrayList<Entry> getListOfEntries() {
+        return listOfEntries;
+    }
+
+
     //Helper method to print an entry
     private void printEntry(Entry entry) {
         System.out.println("************");
@@ -136,4 +141,5 @@ public class AddressBook {
         }
         entry.setEmailAddress(newEmail);
     }
+
 }

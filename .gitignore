@@ -3,3 +3,5 @@
 /workspace.xml
 # IDEA
 .idea
+#ignore Address book
+addressBook.txt

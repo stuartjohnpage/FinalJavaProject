@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
 import java.io.File;  // Import the File class
@@ -11,7 +12,7 @@ public class Main {
         AddressBook myAddressBook = new AddressBook();
         Scanner userInput = new Scanner(System.in);
         boolean notFinished = true;
-        createAddressBookFile();
+        createOrLoadAddressBookFile();
 
         //Loop will run until user inputs that they are finished.
         while(notFinished) {
@@ -29,6 +30,7 @@ public class Main {
                 notFinished = false;
             }
             executeDesiredOperation(desiredOperation, myAddressBook, userInput);
+            saveAddressBookFile(myAddressBook);
         }
         userInput.close();
         System.exit(0);
@@ -75,23 +77,52 @@ public class Main {
                 break;
         }
     }
-    public static void createAddressBookFile(){
+    public static void createOrLoadAddressBookFile(){
         try {
             File file = new File("addressBook.txt");
             if (file.createNewFile()) {
                 System.out.println("Address Book created: " + file.getName());
             } else {
                 System.out.println("Address Book already exists.");
+//                loadAddressBookFile();
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
-    public static void saveAddressBookFile(){
+
+    private static AddressBook loadAddressBookFile() {
+        AddressBook myAddressBook = new AddressBook();
+        try {
+            File AddressBookFile = new File("addressBook.txt");
+            Scanner myReader = new Scanner(AddressBookFile);
+            while (myReader.hasNextLine()) {
+                Entry newEntry = new Entry();
+                newEntry.setFirstName(myReader.nextLine());
+                newEntry.setLastName(myReader.nextLine());
+                newEntry.setPhoneNumber(myReader.nextLine());
+                newEntry.setEmailAddress(myReader.nextLine());
+                myAddressBook.getListOfEntries().add(newEntry);
+            }
+            myReader.close();
+            return myAddressBook;
+
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        return myAddressBook;
+    }
+
+    public static void saveAddressBookFile(AddressBook addressBook){
         try {
             FileWriter myWriter = new FileWriter("addressBook.txt");
-            myWriter.write("Files in Java might be tricky, but it is fun enough!");
+            for(Entry entry : addressBook.getListOfEntries()) {
+                myWriter.write( entry.getFirstName()+ System.lineSeparator() + entry.getLastName() +
+                        System.lineSeparator() + entry.getPhoneNumber() + System.lineSeparator() +
+                        entry.getEmailAddress());
+            }
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
