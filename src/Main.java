@@ -1,4 +1,7 @@
+import java.io.FileWriter;
 import java.util.Scanner;
+import java.io.File;  // Import the File class
+import java.io.IOException;  // Import the IOException class to handle errors
 
 import addressBook.*;
 
@@ -8,6 +11,7 @@ public class Main {
         AddressBook myAddressBook = new AddressBook();
         Scanner userInput = new Scanner(System.in);
         boolean notFinished = true;
+        createAddressBookFile();
 
         //Loop will run until user inputs that they are finished.
         while(notFinished) {
@@ -69,6 +73,30 @@ public class Main {
             case 5:
                 addressBook.deleteEntries();
                 break;
+        }
+    }
+    public static void createAddressBookFile(){
+        try {
+            File file = new File("addressBook.txt");
+            if (file.createNewFile()) {
+                System.out.println("Address Book created: " + file.getName());
+            } else {
+                System.out.println("Address Book already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+    public static void saveAddressBookFile(){
+        try {
+            FileWriter myWriter = new FileWriter("addressBook.txt");
+            myWriter.write("Files in Java might be tricky, but it is fun enough!");
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 }
