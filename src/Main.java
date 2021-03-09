@@ -79,21 +79,20 @@ public class Main {
         }
     }
     public static AddressBook createOrLoadAddressBookFile(){
-        AddressBook addressBook = null;
+        AddressBook createdOrLoadedBook = new AddressBook();
         try {
             File file = new File("addressBook.txt");
-
             if (file.createNewFile()) {
                 System.out.println("Address Book created: " + file.getName());
             } else {
                 System.out.println("Address Book already exists.");
-                addressBook = loadAddressBookFile();
+                createdOrLoadedBook = loadAddressBookFile();
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        return addressBook;
+        return createdOrLoadedBook;
     }
 
     private static AddressBook loadAddressBookFile() {
