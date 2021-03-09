@@ -9,11 +9,9 @@ import addressBook.*;
 public class Main {
     public static void main(String[] args) {
 
-        new AddressBook();
-        AddressBook myAddressBook;
         Scanner userInput = new Scanner(System.in);
         boolean notFinished = true;
-        myAddressBook = createOrLoadAddressBookFile();
+        AddressBook myAddressBook = createOrLoadAddressBookFile();
 
         //Loop will run until user inputs that they are finished.
         while(notFinished) {
@@ -62,7 +60,7 @@ public class Main {
     public static void executeDesiredOperation(Integer operationToExecute, AddressBook addressBook, Scanner input) {
         switch (operationToExecute) {
             case 1:
-                addressBook.addEntry(input);
+                addressBook.addEntry(input,addressBook);
                 break;
             case 2:
                 addressBook.removeEntry(input);
@@ -124,7 +122,7 @@ public class Main {
             for(Entry entry : addressBook.getListOfEntries()) {
                 myWriter.write( entry.getFirstName()+ System.lineSeparator() + entry.getLastName() +
                         System.lineSeparator() + entry.getPhoneNumber() + System.lineSeparator() +
-                        entry.getEmailAddress());
+                        entry.getEmailAddress()+ System.lineSeparator());
             }
             myWriter.close();
             System.out.println("Successfully wrote to the file.");

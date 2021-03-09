@@ -13,7 +13,7 @@ public class AddressBook {
     public AddressBook(){}
 
     //Method to add a new entry.
-    public void addEntry(Scanner input){
+    public void addEntry(Scanner input, AddressBook addressBook){
         Entry newEntry = new Entry();
         System.out.println("Please enter your first name: ");
         String firstName = input.nextLine();
@@ -21,7 +21,7 @@ public class AddressBook {
         System.out.println("Please enter your last name: ");
         newEntry.setLastName(input.nextLine());
         addPhoneNumber(newEntry, input);
-        addEmailAddress(newEntry, input);
+        addEmailAddress(newEntry, input, addressBook);
         listOfEntries.add(newEntry);
         System.out.println("Added New Entry!");
     }
@@ -129,15 +129,23 @@ public class AddressBook {
         entry.setPhoneNumber(newPhoneNumber);
     }
     //helper Regex check for valid email address
-    private void addEmailAddress(Entry entry, Scanner input) {
+    private void addEmailAddress(Entry entry, Scanner input, AddressBook addressBook) {
         boolean validEmail = false;
         String newEmail = null;
-        while(!validEmail) {
+        while (!validEmail) {
+            boolean NotTakenEmail = true;
             System.out.println("Please enter your email address: ");
             newEmail = input.nextLine();
             Pattern pattern = Pattern.compile("^.+@{1}.+\\.{1}.+$");
             Matcher matcher = pattern.matcher(newEmail);
-            validEmail = matcher.find();
+
+            for (Entry existingEntry : this.listOfEntries) {
+                if (newEmail.equalsIgnoreCase(existingEntry.getEmailAddress())) {
+                    NotTakenEmail = false;
+                    System.out.println("This email address is already taken");
+                }
+            }
+            validEmail = matcher.find() && NotTakenEmail;
         }
         entry.setEmailAddress(newEmail);
     }
