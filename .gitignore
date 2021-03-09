@@ -3,5 +3,6 @@
 /workspace.xml
 # IDEA
 .idea
-#ignore Address book
+#ignore Address book and instructions
 addressBook.txt
+JavaApplicationProjectInstructions.pdf

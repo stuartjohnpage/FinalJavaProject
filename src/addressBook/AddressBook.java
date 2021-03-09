@@ -59,20 +59,29 @@ public class AddressBook {
     //Method to remove an entry
     public void removeEntry(Scanner input){
         System.out.println("Enter an entry's email to remove: ");
+        boolean entryFound = false;
         String emailToRemove = input.nextLine();
         Entry entryToDelete = new Entry();
         for(Entry entry: this.listOfEntries) {
             if (emailToRemove.equalsIgnoreCase(entry.getEmailAddress())) {
+                entryFound = true;
                 entryToDelete = entry;
                 break;
             }
+        } if(entryFound){
+            System.out.println("Deleted the following entry:");
+            printEntry(entryToDelete);
+            listOfEntries.remove(entryToDelete);
+        } else {
+            System.out.println("Entry not found");
         }
-        printEntry(entryToDelete);
-        listOfEntries.remove(entryToDelete);
     }
 
     //Method to print the entire address book.
     public void printAddressBook(){
+        if(this.listOfEntries.size() == 0 ){
+            System.out.println("Address book empty!");
+        }
         for(Entry entry: this.listOfEntries) {
             printEntry(entry);
         }
@@ -84,6 +93,7 @@ public class AddressBook {
         System.out.println("Address book cleared!");
     }
 
+    //Getter method to return the list of entries (used in the filesystem methods in main)
     public ArrayList<Entry> getListOfEntries() {
         return listOfEntries;
     }

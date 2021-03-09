@@ -1,3 +1,14 @@
+/**
+ * This FinalJavaProject is an implementation of an address book with multiple features. These include adding, searching
+ * and deleting entries. Each entry has a unique email address associated with it. The address book is saved to a file
+ * in the root folder, and can also be loaded from that file. This application just runs in the console.
+ *
+ *
+ * @author  Stuart Page
+ * @version 1.0
+ * @since   03/09/2021
+ */
+
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
@@ -76,6 +87,8 @@ public class Main {
                 break;
         }
     }
+
+    //Method to create or load an address book file.
     public static AddressBook createOrLoadAddressBookFile(){
         AddressBook createdOrLoadedBook = new AddressBook();
         try {
@@ -93,6 +106,7 @@ public class Main {
         return createdOrLoadedBook;
     }
 
+    //Method to load an address book file if there is one to load.
     private static AddressBook loadAddressBookFile() {
         AddressBook myAddressBook = new AddressBook();
         try {
@@ -116,6 +130,7 @@ public class Main {
         return myAddressBook;
     }
 
+    //Method to save address book file.
     public static void saveAddressBookFile(AddressBook addressBook){
         try {
             FileWriter myWriter = new FileWriter("addressBook.txt");
@@ -125,7 +140,6 @@ public class Main {
                         entry.getEmailAddress()+ System.lineSeparator());
             }
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
