@@ -12,7 +12,7 @@ public class Main {
         AddressBook myAddressBook = new AddressBook();
         Scanner userInput = new Scanner(System.in);
         boolean notFinished = true;
-        createOrLoadAddressBookFile();
+        myAddressBook = createOrLoadAddressBookFile();
 
         //Loop will run until user inputs that they are finished.
         while(notFinished) {
@@ -77,19 +77,22 @@ public class Main {
                 break;
         }
     }
-    public static void createOrLoadAddressBookFile(){
+    public static AddressBook createOrLoadAddressBookFile(){
+        AddressBook addressBook = null;
         try {
             File file = new File("addressBook.txt");
+
             if (file.createNewFile()) {
                 System.out.println("Address Book created: " + file.getName());
             } else {
                 System.out.println("Address Book already exists.");
-//                loadAddressBookFile();
+                addressBook = loadAddressBookFile();
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        return addressBook;
     }
 
     private static AddressBook loadAddressBookFile() {
