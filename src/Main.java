@@ -9,7 +9,8 @@ import addressBook.*;
 public class Main {
     public static void main(String[] args) {
 
-        AddressBook myAddressBook = new AddressBook();
+        new AddressBook();
+        AddressBook myAddressBook;
         Scanner userInput = new Scanner(System.in);
         boolean notFinished = true;
         myAddressBook = createOrLoadAddressBookFile();
