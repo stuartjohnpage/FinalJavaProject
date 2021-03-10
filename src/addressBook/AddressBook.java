@@ -130,9 +130,9 @@ public class AddressBook {
         boolean validPhoneNumber = false;
         String newPhoneNumber = null;
         while (!validPhoneNumber) {
-            System.out.println("Please enter your phone number: ");
+            System.out.println("Please enter your phone number in the format ########## or ###-###-####:  ");
             newPhoneNumber = input.nextLine();
-            Pattern pattern = Pattern.compile("^\\d{10}$");
+            Pattern pattern = Pattern.compile("^\\d{10}|\\d\\d\\d-\\d\\d\\d-\\d\\d\\d\\d$");
             Matcher matcher = pattern.matcher(newPhoneNumber);
             validPhoneNumber = matcher.find();
         }
@@ -160,18 +160,18 @@ public class AddressBook {
         }
         entry.setEmailAddress(newEmail);
     }
-
+    //Helper method to validate name entry
     private void addName(Entry entry, Scanner input, boolean firstName) {
         boolean validName = false;
         String newName = null;
         while (!validName) {
             if(firstName) {
-                System.out.println("Please enter your first name using word characters (a-z A-Z _ 0-9): ");
+                System.out.println("Please enter your first name - numbers are not allowed");
             }else{
-                System.out.println("Please enter your last name using word characters (a-z A-Z _ 0-9): ");
+                System.out.println("Please enter your last name - numbers are not allowed");
             }
             newName = input.nextLine();
-            Pattern pattern = Pattern.compile("^\\w+$");
+            Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
             Matcher matcher = pattern.matcher(newName);
             validName = matcher.find();
         }
