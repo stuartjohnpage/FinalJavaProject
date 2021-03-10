@@ -16,8 +16,8 @@ public class AddressBook {
     //Method to add a new entry.
     public void addEntry(Scanner input) {
         Entry newEntry = new Entry();
-        addFirstName(newEntry, input);
-        addLastName(newEntry, input);
+        addName(newEntry, input, true);
+        addName(newEntry, input, false);
         addPhoneNumber(newEntry, input);
         addEmailAddress(newEntry, input);
         listOfEntries.add(newEntry);
@@ -161,32 +161,24 @@ public class AddressBook {
         entry.setEmailAddress(newEmail);
     }
 
-    //helper Regex check for valid name
-    private void addFirstName(Entry entry, Scanner input) {
+    private void addName(Entry entry, Scanner input, boolean firstName) {
         boolean validName = false;
         String newName = null;
         while (!validName) {
-            System.out.println("Please enter your first name using word characters (a-z A-Z _ 0-9): ");
+            if(firstName) {
+                System.out.println("Please enter your first name using word characters (a-z A-Z _ 0-9): ");
+            }else{
+                System.out.println("Please enter your last name using word characters (a-z A-Z _ 0-9): ");
+            }
             newName = input.nextLine();
             Pattern pattern = Pattern.compile("^\\w+$");
             Matcher matcher = pattern.matcher(newName);
             validName = matcher.find();
         }
-        entry.setFirstName(newName);
-    }
-
-    //helper Regex check for valid name
-    private void addLastName(Entry entry, Scanner input) {
-        boolean validName = false;
-        String newName = null;
-        while (!validName) {
-            System.out.println("Please enter your last name using word characters (a-z A-Z _ 0-9): ");
-            newName = input.nextLine();
-            Pattern pattern = Pattern.compile("^\\w+$");
-            Matcher matcher = pattern.matcher(newName);
-            validName = matcher.find();
+        if(firstName) {
+            entry.setFirstName(newName);
+        }else{
+            entry.setLastName(newName);
         }
-        entry.setLastName(newName);
     }
-
 }
