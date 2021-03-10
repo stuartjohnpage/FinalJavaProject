@@ -16,11 +16,8 @@ public class AddressBook {
     //Method to add a new entry.
     public void addEntry(Scanner input) {
         Entry newEntry = new Entry();
-        System.out.println("Please enter your first name: ");
-        String firstName = input.nextLine();
-        newEntry.setFirstName(firstName);
-        System.out.println("Please enter your last name: ");
-        newEntry.setLastName(input.nextLine());
+        addFirstName(newEntry, input);
+        addLastName(newEntry, input);
         addPhoneNumber(newEntry, input);
         addEmailAddress(newEntry, input);
         listOfEntries.add(newEntry);
@@ -162,6 +159,34 @@ public class AddressBook {
             validEmail = matcher.find() && NotTakenEmail;
         }
         entry.setEmailAddress(newEmail);
+    }
+
+    //helper Regex check for valid name
+    private void addFirstName(Entry entry, Scanner input) {
+        boolean validName = false;
+        String newName = null;
+        while (!validName) {
+            System.out.println("Please enter your first name using word characters (a-z A-Z _ 0-9): ");
+            newName = input.nextLine();
+            Pattern pattern = Pattern.compile("^\\w+$");
+            Matcher matcher = pattern.matcher(newName);
+            validName = matcher.find();
+        }
+        entry.setFirstName(newName);
+    }
+
+    //helper Regex check for valid name
+    private void addLastName(Entry entry, Scanner input) {
+        boolean validName = false;
+        String newName = null;
+        while (!validName) {
+            System.out.println("Please enter your last name using word characters (a-z A-Z _ 0-9): ");
+            newName = input.nextLine();
+            Pattern pattern = Pattern.compile("^\\w+$");
+            Matcher matcher = pattern.matcher(newName);
+            validName = matcher.find();
+        }
+        entry.setLastName(newName);
     }
 
 }
