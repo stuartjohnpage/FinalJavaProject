@@ -21,6 +21,18 @@ public class Entry {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+    public String searchOperation(int operation) {
+        if(operation == 1){
+            return this.getFirstName();
+        }else if(operation == 2){
+            return this.getLastName();
+        }else if(operation == 3) {
+            return this.getPhoneNumber();
+        }else {
+            return this.getEmailAddress();
+        }
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }

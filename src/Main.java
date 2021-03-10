@@ -12,8 +12,8 @@
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
-import java.io.File;  // Import the File class
-import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.File;
+import java.io.IOException;
 
 import addressBook.*;
 
@@ -71,7 +71,7 @@ public class Main {
     public static void executeDesiredOperation(Integer operationToExecute, AddressBook addressBook, Scanner input) {
         switch (operationToExecute) {
             case 1:
-                addressBook.addEntry(input,addressBook);
+                addressBook.addEntry(input);
                 break;
             case 2:
                 addressBook.removeEntry(input);

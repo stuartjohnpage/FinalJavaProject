@@ -10,10 +10,11 @@ public class AddressBook {
 
     private ArrayList<Entry> listOfEntries = new ArrayList<>();
 
-    public AddressBook(){}
+    public AddressBook() {
+    }
 
     //Method to add a new entry.
-    public void addEntry(Scanner input, AddressBook addressBook){
+    public void addEntry(Scanner input) {
         Entry newEntry = new Entry();
         System.out.println("Please enter your first name: ");
         String firstName = input.nextLine();
@@ -21,7 +22,7 @@ public class AddressBook {
         System.out.println("Please enter your last name: ");
         newEntry.setLastName(input.nextLine());
         addPhoneNumber(newEntry, input);
-        addEmailAddress(newEntry, input, addressBook);
+        addEmailAddress(newEntry, input);
         listOfEntries.add(newEntry);
         System.out.println("Added New Entry!");
     }
@@ -37,19 +38,19 @@ public class AddressBook {
         switch (userChoice) {
             case "1":
                 System.out.println("Enter your first name search:");
-                sliceSearch(input);
+                sliceSearch(input,1);
                 break;
             case "2":
                 System.out.println("Enter your last name search:");
-                sliceSearch(input);
+                sliceSearch(input, 2);
                 break;
             case "3":
                 System.out.println("Enter your phone number search:");
-                sliceSearch(input);
+                sliceSearch(input, 3);
                 break;
             case "4":
                 System.out.println("Enter your email address search:");
-                sliceSearch(input);
+                sliceSearch(input, 4);
                 break;
             default:
                 System.out.println("Please enter a number between 1 and 4 next time to select your choice.");
@@ -57,18 +58,19 @@ public class AddressBook {
     }
 
     //Method to remove an entry
-    public void removeEntry(Scanner input){
+    public void removeEntry(Scanner input) {
         System.out.println("Enter an entry's email to remove: ");
         boolean entryFound = false;
         String emailToRemove = input.nextLine();
         Entry entryToDelete = new Entry();
-        for(Entry entry: this.listOfEntries) {
+        for (Entry entry : this.listOfEntries) {
             if (emailToRemove.equalsIgnoreCase(entry.getEmailAddress())) {
                 entryFound = true;
                 entryToDelete = entry;
                 break;
             }
-        } if(entryFound){
+        }
+        if (entryFound) {
             System.out.println("Deleted the following entry:");
             printEntry(entryToDelete);
             listOfEntries.remove(entryToDelete);
@@ -78,17 +80,17 @@ public class AddressBook {
     }
 
     //Method to print the entire address book.
-    public void printAddressBook(){
-        if(this.listOfEntries.size() == 0 ){
+    public void printAddressBook() {
+        if (this.listOfEntries.size() == 0) {
             System.out.println("Address book empty!");
         }
-        for(Entry entry: this.listOfEntries) {
+        for (Entry entry : this.listOfEntries) {
             printEntry(entry);
         }
     }
 
     //Method to clear the address book
-    public void deleteEntries(){
+    public void deleteEntries() {
         this.listOfEntries = new ArrayList<>();
         System.out.println("Address book cleared!");
     }
@@ -110,26 +112,27 @@ public class AddressBook {
     }
 
     //Helper method to search a string with a substring
-    private void sliceSearch(Scanner input){
+    private void sliceSearch(Scanner input, int operation) {
         String searchTerm = input.nextLine();
         boolean entryFound = false;
-        for(Entry entry: this.listOfEntries) {
-            String slicedEntry = entry.getFirstName().substring(0, searchTerm.length());
-            if(slicedEntry.equalsIgnoreCase(searchTerm)){
+        for (Entry entry : this.listOfEntries) {
+            String slicedEntry = entry.searchOperation(operation).substring(0, searchTerm.length());
+            if (slicedEntry.equalsIgnoreCase(searchTerm)) {
                 System.out.println("Entry found!");
                 entryFound = true;
                 printEntry(entry);
             }
         }
-        if(!entryFound) {
+        if (!entryFound) {
             System.out.println("Entry/Entries not found");
         }
     }
+
     //helper Regex check for valid phone number
     private void addPhoneNumber(Entry entry, Scanner input) {
         boolean validPhoneNumber = false;
         String newPhoneNumber = null;
-        while(!validPhoneNumber) {
+        while (!validPhoneNumber) {
             System.out.println("Please enter your phone number: ");
             newPhoneNumber = input.nextLine();
             Pattern pattern = Pattern.compile("^\\d{10}$");
@@ -138,8 +141,9 @@ public class AddressBook {
         }
         entry.setPhoneNumber(newPhoneNumber);
     }
+
     //helper Regex check for valid email address
-    private void addEmailAddress(Entry entry, Scanner input, AddressBook addressBook) {
+    private void addEmailAddress(Entry entry, Scanner input) {
         boolean validEmail = false;
         String newEmail = null;
         while (!validEmail) {
