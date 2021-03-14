@@ -1,10 +1,10 @@
-/**
- * This FinalJavaProject is an implementation of an address book with multiple features. These include adding, searching
- * and deleting entries. Each entry has a unique email address associated with it. The address book is saved to a file
- * in the root folder, and can also be loaded from that file. This application just runs in the console.
- *
- *
- * @author  Stuart Page
+/*
+  This FinalJavaProject is an implementation of an address book with multiple features. These include adding, searching
+  and deleting entries. Each entry has a unique email address associated with it. The address book is saved to a file
+  in the root folder, and can also be loaded from that file. This application just runs in the console.
+
+
+  @author  Stuart Page
  * @version 1.0
  * @since   03/09/2021
  */

@@ -113,7 +113,11 @@ public class AddressBook {
         String searchTerm = input.nextLine();
         boolean entryFound = false;
         for (Entry entry : this.listOfEntries) {
-            String slicedEntry = entry.searchOperation(operation).substring(0, Math.min(searchTerm.length(), entry.searchOperation(operation).length()));
+            //entry.searchOperation(operation) returns the searched for attribute in the current entry.
+            // It then sets sliced entry as the substring of that attribute starting from zero. This cannot
+            //be longer than the searched for attribute - math.min ensures no index out of range errors
+            String slicedEntry = entry.searchOperation(operation).substring(0, Math.min(searchTerm.length(),
+                    entry.searchOperation(operation).length()));
             if (slicedEntry.equalsIgnoreCase(searchTerm)) {
                 System.out.println("Entry found!");
                 entryFound = true;

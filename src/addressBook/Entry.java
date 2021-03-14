@@ -49,7 +49,7 @@ public class Entry {
                 '}';
     }
 
-    //Helper method to help search for substrings
+    //Helper method to help search for substrings - returns the attribute being searched for
     public String searchOperation(int operation) {
         if(operation == 1){
             return this.getFirstName();
