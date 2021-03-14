@@ -32,7 +32,7 @@ public class Main {
             System.out.println("4) Print Address Book");
             System.out.println("5) Delete Address Book");
             System.out.println("6) Quit");
-            System.out.println("Please choose what you want to do with the database");
+            System.out.println("Please choose what you want to do with the database:");
             //Asks the user to make their choice.
 
             int desiredOperation = makeAChoice(userInput);

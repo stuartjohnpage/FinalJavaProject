@@ -113,7 +113,7 @@ public class AddressBook {
         String searchTerm = input.nextLine();
         boolean entryFound = false;
         for (Entry entry : this.listOfEntries) {
-            String slicedEntry = entry.searchOperation(operation).substring(0, searchTerm.length());
+            String slicedEntry = entry.searchOperation(operation).substring(0, Math.min(searchTerm.length(), entry.searchOperation(operation).length()));
             if (slicedEntry.equalsIgnoreCase(searchTerm)) {
                 System.out.println("Entry found!");
                 entryFound = true;
