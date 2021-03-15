@@ -136,10 +136,11 @@ public class AddressBook {
         while (!validPhoneNumber) {
             System.out.println("Please enter your phone number in the format ########## or ###-###-####:  ");
             newPhoneNumber = input.nextLine();
-            Pattern pattern = Pattern.compile("^\\d{10}|\\d\\d\\d-\\d\\d\\d-\\d\\d\\d\\d$");
+            Pattern pattern = Pattern.compile("^\\d{10}|\\d{3}-\\d{3}-\\d{4}$");
             Matcher matcher = pattern.matcher(newPhoneNumber);
             validPhoneNumber = matcher.find();
         }
+        //ToDO - make sure phone number is saved as ##########
         entry.setPhoneNumber(newPhoneNumber);
     }
 
